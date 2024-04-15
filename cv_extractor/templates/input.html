@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Resume</title>
+    {% load static %}
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; text-align: center;">
+    <h3>Resume Parser</h3>
+    <form method="post" enctype="multipart/form-data" style="margin-bottom: 20px; display: inline-block;">
+        {% csrf_token %}
+        <input type="file" name="cv" id="fileInput" multiple accept=".pdf,.docx" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+        <button type="submit" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; margin-left: 10px;">Enter</button>
+    </form>
+    <a href="{% static 'output_excel/output.xlsx'%}" style="text-decoration: none; display: inline-block;">
+        <button style="padding: 5px 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">Download excel</button>
+    </a>
+
+    <p style="font-family: Arial, sans-serif; color:red; padding: 20px; text-align: center;">
+    {{msg}}
+    </p>
+
+    <script>
+        // Set a limit for the number of files
+        var fileInput = document.getElementById('fileInput');
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 5) {
+                alert('You can only upload a maximum of 5 files');
+                this.value = ''; // Clear the selected files
+            }
+        });
+    </script>
+</body>
+</html>
